@@ -17,6 +17,7 @@ COPY ./profile /etc/profile
 RUN /bin/bash -c "source /etc/profile"
 # 安装 SDKMAN 开发包管理器
 RUN curl -s "https://get.sdkman.io" | bash
+RUN /bin/bash -c "source /root/.sdkman/bin/sdkman-init.sh"
 # 安装 Gradle
 RUN sdk install gradle 4.4
 RUN rm -rf /usr/local/tomcat/webapps/ROOT
