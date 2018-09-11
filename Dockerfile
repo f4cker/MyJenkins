@@ -12,7 +12,7 @@ RUN apt-get update \
     && tar zxvf jdk-8u181-linux-x64.tar.gz \
     && rm jdk-8u181-linux-x64.tar.gz
 # 配置 JDK 环境变量
-COPY ./jdk1.8.0_181 /usr/local/java/
+COPY jdk1.8.0_181 /usr/local/java/
 COPY ./profile /etc/profile    
 RUN /bin/bash -c "source /etc/profile"
 # 安装 SDKMAN 开发包管理器
