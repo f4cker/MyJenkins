@@ -12,10 +12,12 @@ RUN apt-get update \
     && wget -c --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jdk-8u181-linux-x64.tar.gz \
     && mkdir /usr/local/java \
     && tar zxvf jdk-8u181-linux-x64.tar.gz /usr/local/java/ \
-    && rm -rf jdk-8u181-linux-x64.tar.gz \
+    && rm -rf jdk-8u181-linux-x64.tar.gz
 # 配置 JDK 环境变量
 COPY ./profile /etc/profile    
 RUN source /etc/profile
+# 安装 Gradle
+RUN sdk install gradle 4.4
 RUN rm -rf /usr/local/tomcat/webapps/ROOT
 ADD ./jenkins.war /usr/local/tomcat/webapps/ROOT.war
 RUN sed -i 's/8080/80/' /usr/local/tomcat/conf/server.xml
