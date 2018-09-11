@@ -9,9 +9,8 @@ RUN apt-get update \
         git \
         zip \
         unzip \
-    && mkdir /usr/local/java \
     && apt-get clean \
-    && apt-get auto clean
+    && apt-get autoclean
 
 # 配置 jenkins 为 80 端口
 RUN rm -rf /usr/local/tomcat/webapps/ROOT
