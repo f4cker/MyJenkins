@@ -16,7 +16,7 @@ COPY jdk1.8.0_181 /usr/local/java/
 COPY ./profile /etc/profile    
 RUN /bin/bash -c "source /etc/profile"
 # 安装 SDKMAN 开发包管理器
-RUN curl -s "https://get.sdkman.io" | bash
+RUN curl -sS "https://get.sdkman.io" | bash
 RUN /bin/bash -c "source /root/.sdkman/bin/sdkman-init.sh"
 # 安装 Gradle
 RUN /bin/bash -c "sdk install gradle 4.4"
