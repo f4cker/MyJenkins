@@ -10,9 +10,9 @@ RUN apt-get update \
     && wget -c --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jdk-8u181-linux-x64.tar.gz \
     && mkdir /usr/local/java \
     && tar zxvf jdk-8u181-linux-x64.tar.gz \
-    && rm jdk-8u181-linux-x64.tar.gz
+    && rm jdk-8u181-linux-x64.tar.gz \
+    && ls -al
 # 配置 JDK 环境变量
-COPY jdk1.8.0_181 /usr/local/java/
 COPY ./profile /etc/profile    
 RUN /bin/bash -c "source /etc/profile"
 # 安装 SDKMAN 开发包管理器
