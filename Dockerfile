@@ -31,6 +31,6 @@ RUN /bin/bash -c "source /root/.sdkman/bin/sdkman-init.sh"
 
 EXPOSE 80
 
-RUN chmod 0777 ./entrypoint.sh
+RUN chmod 0777 entrypoint.sh
 # 执行脚本
-ENTRYPOINT [ "./entrypoint.sh" ]
+ENTRYPOINT [ "entrypoint.sh" ]
