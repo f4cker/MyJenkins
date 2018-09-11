@@ -1,4 +1,21 @@
 FROM daocloud.io/library/tomcat:8.5.15
+MAINTAINER Layoute
+# 安装所需依赖
+RUN apt-get update \
+    && apt-get install -y \
+        git \
+        zip \
+        unzip \
+    # 安装 SDKMAN 开发包管理器
+    && curl -s "https://get.sdkman.io" | bash \
+    # 安装 Oracle JDK
+    && wget -c --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jdk-8u181-linux-x64.tar.gz \
+    && mkdir /usr/local/java \
+    && tar zxvf jdk-8u181-linux-x64.tar.gz /usr/local/java/ \
+    && rm -rf jdk-8u181-linux-x64.tar.gz \
+# 配置 JDK 环境变量
+COPY ./profile /etc/profile    
+RUN source /etc/profile
 RUN rm -rf /usr/local/tomcat/webapps/ROOT
 ADD ./jenkins.war /usr/local/tomcat/webapps/ROOT.war
 RUN sed -i 's/8080/80/' /usr/local/tomcat/conf/server.xml
