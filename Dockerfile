@@ -35,6 +35,6 @@ WORKDIR /usr/local/tomcat
 COPY ./entrypoint.sh /usr/local/tomcat/
 RUN cd /usr/local/tomcat
 
-RUN chmod 0777 entrypoint.sh
+RUN chmod 0777 ./entrypoint.sh
 # 执行脚本
-ENTRYPOINT [ "entrypoint.sh" ]
+ENTRYPOINT [ "./entrypoint.sh" ]
