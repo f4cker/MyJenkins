@@ -7,7 +7,7 @@ env >> /etc/default/locale
 # 安装 Gradle
 sdk install gradle 4.4
 
-# 启动 apache
-apache2-foreground
+# 启动 tomcat
+catalina.sh run
 
 exec "$@"
