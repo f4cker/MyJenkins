@@ -18,12 +18,9 @@ ADD ./jenkins.war /usr/local/tomcat/webapps/ROOT.war
 RUN sed -i 's/8080/80/' /usr/local/tomcat/conf/server.xml
 
 # 配置 JDK 环境变量
-# COPY ./profile /etc/profile
+COPY ./profile /etc/profile
 
 # 安装 Oracle JDK
-# WORKDIR /usr/local/java
-# RUN wget -c --tries=20 --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jdk-8u181-linux-x64.tar.gz
-# ADD jdk-8u181-linux-x64.tar.gz /usr/local/java
 ADD http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jdk-8u181-linux-x64.tar.gz /usr/local/java
 RUN /bin/bash -c "source /etc/profile"
 
