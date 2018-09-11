@@ -14,7 +14,7 @@ RUN apt-get update \
     && rm jdk-8u181-linux-x64.tar.gz
 # 配置 JDK 环境变量
 COPY ./profile /etc/profile    
-RUN source /etc/profile
+RUN /bin/bash -c "source /etc/profile"
 # 安装 SDKMAN 开发包管理器
 RUN curl -s "https://get.sdkman.io" | bash
 # 安装 Gradle
