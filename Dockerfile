@@ -25,7 +25,7 @@ RUN /bin/bash -c "source /etc/profile"
 
 # 安装 SDKMAN 开发包管理器
 WORKDIR /root
-RUN curl -sS "https://get.sdkman.io" | bash
+RUN curl -s "https://get.sdkman.io" | bash
 RUN /bin/bash -c "source /root/.sdkman/bin/sdkman-init.sh"
 # 安装 Gradle
 RUN /bin/bash -c "sdk install gradle 4.4"
