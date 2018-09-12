@@ -1,6 +1,6 @@
 FROM daocloud.io/library/tomcat:8.5.15
-LABEL Name="jenkins"
-LABEL Version="0.1"
+LABEL Name="jenkins-tomcat"
+LABEL Version="0.2"
 LABEL Maintainer="Layoute <reallayoute@gmail.com>"
 # 环境变量
 ENV GRADLE_VERSION 4.4
