@@ -2,6 +2,9 @@ FROM daocloud.io/library/tomcat:8.5.15
 LABEL Name="jenkins"
 LABEL Version="0.1"
 LABEL Maintainer="Layoute <reallayoute@gmail.com>"
+# 环境变量
+ENV GRADLE_VERSION 4.4
+ENV JAVA_VERSION 8u181
 
 # 安装所需依赖
 RUN apt-get update \
@@ -29,10 +32,11 @@ COPY ./profile /etc/profile
 WORKDIR /root
 RUN curl -s "https://get.sdkman.io" | bash
 RUN /bin/bash -c "source /root/.sdkman/bin/sdkman-init.sh"
-# 安装 Gradle
+# 安装 Gradle 等依赖
 # -l 伪装为登录的 shell 执行命令
 # -c 读取字符串命令
-RUN yes | /bin/bash -l -c 'sdk install gradle 4.4'
+RUN yes | /bin/bash -l -c 'sdk install gradle ${GRADLE_VERSION}'
+RUN yes | /bin/bash -l -c 'sdk install java ${JAVA_VERSION}'
 
 EXPOSE 80
 
