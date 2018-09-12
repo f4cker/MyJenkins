@@ -24,10 +24,6 @@ RUN sed -i 's/8080/80/' /usr/local/tomcat/conf/server.xml
 # 配置 JDK 环境变量
 COPY ./profile /etc/profile
 
-# 安装 Oracle JDK
-# ADD http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jdk-8u181-linux-x64.tar.gz /usr/local/java
-# RUN /bin/bash -c "source /etc/profile"
-
 # 安装 SDKMAN 开发包管理器
 WORKDIR /root
 RUN curl -s "https://get.sdkman.io" | bash
@@ -38,12 +34,13 @@ RUN /bin/bash -c "source /root/.sdkman/bin/sdkman-init.sh"
 RUN yes | /bin/bash -l -c 'sdk install gradle ${GRADLE_VERSION}'
 RUN yes | /bin/bash -l -c 'sdk install java ${JAVA_VERSION}'
 
+# 暴露端口
 EXPOSE 80
 
+# 设置 entrypoint 权限并运行
 WORKDIR /usr/local/tomcat
 COPY ./entrypoint.sh /usr/local/tomcat/
 RUN cd /usr/local/tomcat
-
 RUN chmod 0777 ./entrypoint.sh
 # 执行脚本
 ENTRYPOINT [ "./entrypoint.sh" ]
