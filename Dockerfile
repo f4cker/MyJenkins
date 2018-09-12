@@ -21,14 +21,16 @@ RUN sed -i 's/8080/80/' /usr/local/tomcat/conf/server.xml
 COPY ./profile /etc/profile
 
 # 安装 Oracle JDK
-ADD http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jdk-8u181-linux-x64.tar.gz /usr/local/java
-RUN /bin/bash -c "source /etc/profile"
+# ADD http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jdk-8u181-linux-x64.tar.gz /usr/local/java
+# RUN /bin/bash -c "source /etc/profile"
 
 # 安装 SDKMAN 开发包管理器
 WORKDIR /root
 RUN curl -s "https://get.sdkman.io" | bash
 RUN /bin/bash -c "source /root/.sdkman/bin/sdkman-init.sh"
 # 安装 Gradle
+# -l 伪装为登录的 shell 执行命令
+# -c 读取字符串命令
 RUN yes | /bin/bash -l -c 'sdk install gradle 4.4'
 
 EXPOSE 80

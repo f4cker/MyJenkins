@@ -1,0 +1,58 @@
+version: '2'
+
+services:
+  nginx-proxy:
+    image: index.docker.io/jwilder/nginx-proxy:latest
+    container_name: nginx-proxy
+    privileged: true
+    restart: always
+    ports:
+    - 80:80
+    - 443:443
+    volumes:
+    - /etc/nginx/conf.d
+    - /etc/nginx/vhost.d:/etc/nginx/vhost.d
+    - /etc/nginx/html:/usr/share/nginx/html
+    - /etc/nginx/certs:/etc/nginx/certs:ro
+    - /var/run/docker.sock:/tmp/docker.sock:ro
+  
+  letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    container_name: letsencrypt
+    privileged: true
+    restart: always
+    volumes_from:
+    - nginx-proxy
+    volumes:
+    - /etc/nginx/certs:/etc/nginx/certs
+    - /var/run/docker.sock:/var/run/docker.sock:ro
+
+  jenkins:
+    build: 
+      dockerfile: ./Dockerfile
+      context: .
+    image: jenkins_sdkman
+    container_name: jenkins
+    privileged: true
+    restart: always
+    ports:
+    - '80'
+    volumes:
+    - /etc/jenkins:/root/.jenkins/
+    - /etc/jenkins_home:/var/jenkins_home
+    volumes_from:
+    - android_sdk
+    environment:
+    - LETSENCRYPT_MAIL=286746379@qq.com
+    - LETSENCRYPT_HOST=jenkins.layoute.top
+    - VIRTUAL_HOST=jenkins.layoute.top
+
+  android_sdk:
+    image: runmymind/docker-android-sdk:latest
+    container_name: android_sdk
+    privileged: true
+    restart: always
+    environment:
+    - REPO_OS_OVERRIDE=linux
+    volumes:
+    - /etc/android/sdk:/opt/android-sdk-linux
