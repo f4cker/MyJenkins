@@ -4,7 +4,8 @@ LABEL Version="0.1"
 LABEL Maintainer="Layoute <reallayoute@gmail.com>"
 # 环境变量
 ENV GRADLE_VERSION 4.4
-ENV JAVA_VERSION 8u181
+# tomcat 容器自带 java 8u131 放弃安装
+# ENV JAVA_VERSION 8.0.181_zulu
 
 # 安装所需依赖
 RUN apt-get update \
@@ -32,7 +33,7 @@ RUN /bin/bash -c "source /root/.sdkman/bin/sdkman-init.sh"
 # -l 伪装为登录的 shell 执行命令
 # -c 读取字符串命令
 RUN yes | /bin/bash -l -c 'sdk install gradle ${GRADLE_VERSION}'
-RUN yes | /bin/bash -l -c 'sdk install java ${JAVA_VERSION}'
+# RUN yes | /bin/bash -l -c 'sdk install java ${JAVA_VERSION}'
 
 # 暴露端口
 EXPOSE 80
