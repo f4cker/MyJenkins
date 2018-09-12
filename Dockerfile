@@ -1,7 +1,7 @@
 FROM daocloud.io/library/tomcat:8.5.15
 LABEL Name="jenkins"
 LABEL Version="0.1"
-LABEL Maintainer="reallayoute@gmail.com"
+LABEL Maintainer="Layoute <reallayoute@gmail.com>"
 
 # 安装所需依赖
 RUN apt-get update \
@@ -37,4 +37,4 @@ RUN cd /usr/local/tomcat
 
 RUN chmod 0777 ./entrypoint.sh
 # 执行脚本
-ENTRYPOINT [ "./entrypoint.sh" ]
+ENTRYPOINT [ "bash", "./entrypoint.sh" ]
