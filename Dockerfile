@@ -4,6 +4,7 @@ LABEL Version="0.1"
 LABEL Maintainer="Layoute <reallayoute@gmail.com>"
 # 环境变量
 ENV GRADLE_VERSION 4.4
+ENV GRADLE_HOME /root/.sdkman/candidates/gradle/${GRADLE_VERSION}/
 # tomcat 容器自带 java 8u131 放弃安装
 # ENV JAVA_VERSION 8.0.181_zulu
 
