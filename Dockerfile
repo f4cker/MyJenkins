@@ -17,14 +17,10 @@ RUN apt-get update \
     && apt-get clean \
     && apt-get autoclean
 
-# 配置 jenkins 为 80 端口
+# 配置 jenkins 为 80 端口根路径
 RUN rm -rf /usr/local/tomcat/webapps/ROOT
-# ADD ./jenkins.war /usr/local/tomcat/webapps/ROOT.war
 ADD https://updates.jenkins-ci.org/download/war/2.141/jenkins.war /usr/local/tomcat/webapps/ROOT.war
 RUN sed -i 's/8080/80/' /usr/local/tomcat/conf/server.xml
-
-# 配置 JDK 环境变量
-COPY ./profile /etc/profile
 
 # 安装 SDKMAN 开发包管理器
 WORKDIR /root
