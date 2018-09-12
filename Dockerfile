@@ -28,6 +28,8 @@ RUN /bin/bash -c "source /etc/profile"
 WORKDIR /root
 RUN curl -s "https://get.sdkman.io" | bash
 RUN /bin/bash -c "source /root/.sdkman/bin/sdkman-init.sh"
+# 安装 Gradle
+RUN yes | /bin/bash -l -c 'sdk install gradle 4.4'
 
 EXPOSE 80
 
@@ -37,4 +39,4 @@ RUN cd /usr/local/tomcat
 
 RUN chmod 0777 ./entrypoint.sh
 # 执行脚本
-ENTRYPOINT [ "bash", "./entrypoint.sh" ]
+ENTRYPOINT [ "./entrypoint.sh" ]
