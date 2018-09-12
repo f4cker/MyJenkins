@@ -19,7 +19,7 @@ RUN apt-get update \
 
 # 配置 jenkins 为 80 端口根路径
 RUN rm -rf /usr/local/tomcat/webapps/ROOT
-ADD https://updates.jenkins-ci.org/download/war/2.141/jenkins.war /usr/local/tomcat/webapps/ROOT.war
+ADD http://ftp-nyc.osuosl.org/pub/jenkins/war-stable/2.121.3/jenkins.war /usr/local/tomcat/webapps/ROOT.war
 RUN sed -i 's/8080/80/' /usr/local/tomcat/conf/server.xml
 
 # 安装 SDKMAN 开发包管理器
