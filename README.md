@@ -1,6 +1,7 @@
 # Jenkins with tomcat support
 ## What is `jenkins-tomcat`
 
+It's a docker image contain jenkins with support of tomcat that you can deploy and reach straightly via http://your_ip
 
 ## JUST ANDROID_SDK
 ```bash
